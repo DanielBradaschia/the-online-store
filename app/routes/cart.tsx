@@ -15,15 +15,13 @@ export async function loader({ request }: Route.LoaderArgs) {
   const session = await getCartSession(request);
   const cart = readCart(session);
 
-  // The cookie only knows ids and quantities. Titles, images and — most
-  // importantly — prices always come fresh from the API.
   const products = await Promise.all(
     cart.map((item) => findProduct(item.id, request.signal)),
   );
 
   const lines = cart.flatMap((item, i) => {
     const product = products[i];
-    if (!product) return []; // product no longer exists → drop it
+    if (!product) return []; // product no longer exists -> drop it
     return [
       {
         id: product.id,
@@ -59,8 +57,6 @@ export async function action({ request }: Route.ActionArgs) {
   const session = await getCartSession(request);
   let cart = readCart(session);
 
-  // Both operations only touch items already in the cart, so this action
-  // can't be used to add arbitrary products — that's the product page's job.
   switch (intent) {
     case "remove":
       cart = removeItem(cart, id);
@@ -70,7 +66,7 @@ export async function action({ request }: Route.ActionArgs) {
       if (!Number.isInteger(quantity) || quantity < 0) {
         throw data("Invalid quantity", { status: 400 });
       }
-      cart = setQuantity(cart, id, quantity); // clamps to MAX, 0 removes
+      cart = setQuantity(cart, id, quantity);
       break;
     }
     default:
@@ -83,11 +79,6 @@ export async function action({ request }: Route.ActionArgs) {
   );
 }
 
-/**
- * Optimistic UI: while a line's fetcher is in flight, show the quantity it
- * is *about* to have (0 = being removed). When the action finishes, the
- * loader re-runs and the real data takes over.
- */
 function usePendingQuantities() {
   const pending = new Map<number, number>();
   for (const fetcher of useFetchers()) {

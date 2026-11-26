@@ -20,12 +20,12 @@ export async function loader({ request }: Route.LoaderArgs) {
   const page = parsePage(url.searchParams.get("page"));
   const sort = parseSort(url.searchParams.get("sort"));
 
-  // ?page=abc, ?page=0, ?page=-1 → back to page 1 (other params kept).
+  // ?page=abc, ?page=0, ?page=-1 -> back to page 1 (other params kept).
   if (page === null) {
     throw redirect(url.pathname + withPage(url.searchParams, 1));
   }
 
-  // ?sort=whatever → drop the unknown sort, keep everything else.
+  // ?sort=whatever -> drop the unknown sort, keep everything else.
   if (sort === null) {
     url.searchParams.delete("sort");
     throw redirect(url.pathname + url.search);
@@ -51,7 +51,7 @@ export async function loader({ request }: Route.LoaderArgs) {
 
   const totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE));
 
-  // ?page=999 → last real page.
+  // ?page=999 -> last real page.
   if (page > totalPages) {
     throw redirect(url.pathname + withPage(url.searchParams, totalPages));
   }

@@ -13,11 +13,8 @@ import { formatPrice } from "~/lib/format";
 import type { Route } from "./+types/product";
 
 export async function loader({ params, request }: Route.LoaderArgs) {
-  // Throws a 404 for unknown/invalid ids → ErrorBoundary below.
   const product = await getProduct(params.id, request.signal);
 
-  // Send the browser only what this page renders, not the full object
-  // (reviews, meta, dimensions…).
   return {
     product: {
       id: product.id,
@@ -78,7 +75,6 @@ export default function Product({ loaderData }: Route.ComponentProps) {
 
   return (
     <article className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,26rem)] lg:gap-12">
-      {/* key: start at the first image again when navigating to another product */}
       <ProductGallery key={product.id} images={product.images} title={product.title} />
 
       <div>
@@ -87,7 +83,6 @@ export default function Product({ loaderData }: Route.ComponentProps) {
           {formatPrice(product.price)}
         </p>
 
-        {/* Becomes a real <Form method="post"> + action in step 10 */}
         <AddToCartButton />
 
         <section className="mt-6 border-t border-brand pt-6" aria-labelledby="details-heading">
