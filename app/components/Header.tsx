@@ -6,8 +6,6 @@ type NavItem = { label: string; to: string; showActive?: boolean };
 
 const NAV_ITEMS: NavItem[] = [
   { label: "Home", to: "/" },
-  // The homepage *is* the shop, so Shop points there too — but only Home
-  // gets the active style, otherwise both would be highlighted on "/".
   { label: "Shop", to: "/", showActive: false },
   { label: "About", to: "/about" },
   { label: "Contact", to: "/contact" },

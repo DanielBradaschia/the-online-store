@@ -18,7 +18,6 @@ export function ProductGallery({ images, title }: Props) {
           }
           width={600}
           height={600}
-          // The main image is the most important thing on the page.
           fetchPriority="high"
           className="h-full w-full object-contain p-6 mix-blend-multiply sm:p-10"
         />

@@ -17,7 +17,7 @@ export function CategoryFilter({ categories, selected }: Props) {
   );
   const [mobileOpen, setMobileOpen] = useState(false);
 
-  // Keep sort (and anything else) but drop page: new filter → page 1.
+  // Keep sort (and anything else) but drop page: new filter -> page 1.
   const preserved = [...searchParams].filter(
     ([key]) => key !== "category" && key !== "page",
   );

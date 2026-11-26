@@ -26,7 +26,6 @@ export function CartSummary({ totals }: { totals: Totals }) {
         </div>
       </dl>
 
-      {/* Checkout is out of scope for this exercise: shown, but disabled. */}
       <button
         type="button"
         disabled

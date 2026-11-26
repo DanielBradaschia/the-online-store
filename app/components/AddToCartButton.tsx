@@ -5,9 +5,6 @@ import { Check } from "lucide-react";
 type ActionData = { ok: boolean; message: string };
 
 export function AddToCartButton() {
-  // A fetcher posts to this route's action without navigating:
-  // no new history entry, no scroll jump — but loaders still revalidate,
-  // so the header badge updates on its own.
   const fetcher = useFetcher<ActionData>();
   const busy = fetcher.state !== "idle";
 
@@ -40,7 +37,6 @@ export function AddToCartButton() {
         )}
       </button>
 
-      {/* Announced by screen readers; visible only for errors. */}
       <p
         role="status"
         className={error ? "mt-2 text-sm text-red-700" : "sr-only"}

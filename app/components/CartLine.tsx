@@ -9,10 +9,9 @@ export type CartLineData = {
   title: string;
   price: number;
   thumbnail: string;
-  quantity: number; // already the optimistic value (see cart.tsx)
+  quantity: number; 
 };
 
-/** Fetcher key per line, so the cart page can read in-flight changes. */
 export const CART_LINE_KEY_PREFIX = "cart-line-";
 export const cartLineKey = (id: number) => `${CART_LINE_KEY_PREFIX}${id}`;
 
@@ -31,8 +30,6 @@ export function CartLine({ line }: { line: CartLineData }) {
     fetcher.submit({ intent: "remove", id: String(id) }, { method: "post" });
   };
 
-  // "−" at quantity 1 would submit quantity=0: ask first instead.
-  // (Without JS there's no dialog and the form simply removes the item.)
   const handleStepperSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     const submitter = (event.nativeEvent as SubmitEvent)
       .submitter as HTMLButtonElement | null;
@@ -66,7 +63,6 @@ export function CartLine({ line }: { line: CartLineData }) {
         <p className="text-sm text-brand">{formatPrice(line.price)}</p>
 
         <div className="mt-auto flex items-center gap-3 pt-4">
-          {/* Quantity stepper: the clicked button's value is the NEW quantity */}
           <fetcher.Form
             method="post"
             onSubmit={handleStepperSubmit}
@@ -123,7 +119,6 @@ export function CartLine({ line }: { line: CartLineData }) {
         </div>
       </div>
 
-      {/* Native modal: focus is trapped inside, Esc closes it. */}
       <dialog
         ref={dialogRef}
         aria-labelledby={`remove-title-${id}`}

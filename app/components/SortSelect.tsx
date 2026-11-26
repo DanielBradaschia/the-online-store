@@ -6,8 +6,6 @@ export function SortSelect({ value }: { value: SortKey }) {
   const [searchParams] = useSearchParams();
   const submit = useSubmit();
 
-  // Everything except sort/page, carried along as hidden inputs so the
-  // no-JS form submit keeps e.g. the category filter (step 7).
   const preserved = [...searchParams].filter(
     ([key]) => key !== "sort" && key !== "page",
   );
@@ -34,7 +32,6 @@ export function SortSelect({ value }: { value: SortKey }) {
         <select
           id="sort"
           name="sort"
-          // key forces a reset when the URL changes (e.g. back button)
           key={value}
           defaultValue={value}
           onChange={handleChange}
@@ -53,7 +50,6 @@ export function SortSelect({ value }: { value: SortKey }) {
         />
       </div>
 
-      {/* Without JavaScript there's no onChange — offer a plain submit. */}
       <noscript>
         <button
           type="submit"

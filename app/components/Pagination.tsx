@@ -67,8 +67,6 @@ function Arrow({
   const label = direction === "prev" ? "Previous page" : "Next page";
   const Icon = direction === "prev" ? ChevronLeft : ChevronRight;
 
-  // Disabled: a span, not a link — links can't be truly disabled,
-  // and a dead link would still be focusable and announced as clickable.
   if (to === null) {
     return (
       <span
