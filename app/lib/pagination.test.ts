@@ -55,7 +55,7 @@ describe("getPageItems", () => {
     [9, "1 … 8 9 10 … 22"],
     [19, "1 … 18 19 20 21 22"],
     [22, "1 … 18 19 20 21 22"],
-  ])("page %i of 22 → %s", (current, expected) => {
+  ])("page %i of 22 -> %s", (current, expected) => {
     expect(show(getPageItems(current, 22))).toBe(expected);
   });
 

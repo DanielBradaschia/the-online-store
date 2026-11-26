@@ -21,7 +21,7 @@ export type SortKey = (typeof SORT_OPTIONS)[number]["value"];
 
 export const DEFAULT_SORT: SortKey = "featured";
 
-/** Reads ?sort. Missing → default; unknown value → null (loader redirects). */
+/** Reads ?sort. Missing -> default; unknown value -> null (loader redirects). */
 export function parseSort(raw: string | null): SortKey | null {
   if (raw === null) return DEFAULT_SORT;
   return SORT_OPTIONS.some((o) => o.value === raw) ? (raw as SortKey) : null;
@@ -36,7 +36,7 @@ export function toApiSort(key: SortKey): { sortBy?: SortField; order?: SortOrder
 type Sortable = { id: number; price: number; title: string; rating: number };
 
 /**
- * Sorts products in our own code — used when results are merged from
+ * Sorts products in our own code - used when results are merged from
  * several category requests, so the API can't sort them for us.
  * "Featured" = id order, which is DummyJSON's default order.
  * Ties fall back to id so the order is stable across pages.

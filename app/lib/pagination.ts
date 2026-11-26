@@ -14,7 +14,7 @@ export function parsePage(raw: string | null): number | null {
 /** Returns a "?..." search string with `page` set, keeping other params. */
 export function withPage(search: string | URLSearchParams, page: number) {
   const params = new URLSearchParams(search);
-  // Page 1 is the default — keep canonical URLs clean.
+  // Page 1 is the default - keep canonical URLs clean.
   if (page <= 1) params.delete("page");
   else params.set("page", String(page));
   const query = params.toString();
@@ -23,9 +23,9 @@ export function withPage(search: string | URLSearchParams, page: number) {
 
 /**
  * Page numbers to render, always 7 slots once there are enough pages:
- *   current=1  → 1 2 3 4 5 … 22
- *   current=9  → 1 … 8 9 10 … 22
- *   current=22 → 1 … 18 19 20 21 22
+ *   current=1  -> 1 2 3 4 5 … 22
+ *   current=9  -> 1 … 8 9 10 … 22
+ *   current=22 -> 1 … 18 19 20 21 22
  * A fixed slot count keeps the control from changing width as you page.
  */
 export function getPageItems(current: number, totalPages: number): PageItem[] {

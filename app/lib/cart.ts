@@ -1,5 +1,5 @@
 /**
- * Pure cart logic — no cookies, no requests — so it's easy to test and
+ * Pure cart logic - no cookies, no requests - so it's easy to test and
  * safe to import anywhere. The server-side session lives in cart.server.ts.
  */
 
@@ -18,7 +18,7 @@ const isPositiveInt = (n: unknown): n is number =>
 
 /**
  * Turns whatever was stored into a valid Cart. The cookie is signed, so it
- * can't be forged — but its shape could be stale after a code change.
+ * can't be forged - but its shape could be stale after a code change.
  */
 export function normalizeCart(value: unknown): Cart {
   if (!Array.isArray(value)) return [];
@@ -62,7 +62,7 @@ export function removeItem(cart: Cart, id: number): Cart {
   return cart.filter((item) => item.id !== id);
 }
 
-/** Total number of units — what the header badge shows. */
+/** Total number of units - what the header badge shows. */
 export function countItems(cart: Cart): number {
   return cart.reduce((sum, item) => sum + item.quantity, 0);
 }

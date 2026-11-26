@@ -42,7 +42,7 @@ describe("sortProducts", () => {
     ["name-asc", [1, 3, 2]],
     ["name-desc", [2, 3, 1]],
     ["rating-desc", [1, 3, 2]],
-  ] as const)("%s → %j", (key, expected) => {
+  ] as const)("%s -> %j", (key, expected) => {
     expect(ids(sortProducts(products, key))).toEqual(expected);
   });
 

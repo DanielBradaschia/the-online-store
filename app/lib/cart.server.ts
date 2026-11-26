@@ -14,12 +14,12 @@ type SessionData = { cart: Cart };
 const storage = createCookieSessionStorage<SessionData>({
   cookie: {
     name: "__cart",
-    httpOnly: true, // not readable from page JavaScript
-    sameSite: "lax", // not sent on cross-site POSTs (CSRF mitigation)
-    secure: process.env.NODE_ENV === "production", // HTTPS-only in prod
+    httpOnly: true, 
+    sameSite: "lax", 
+    secure: process.env.NODE_ENV === "production", 
     path: "/",
     maxAge: 60 * 60 * 24 * 30, // 30 days
-    secrets: [secret], // signs the cookie so it can't be tampered with
+    secrets: [secret], 
   },
 });
 
@@ -33,7 +33,6 @@ export function readCart(session: CartSession): Cart {
   return normalizeCart(session.get("cart"));
 }
 
-/** Stores the cart and returns the Set-Cookie header value to send back. */
 export function commitCart(session: CartSession, cart: Cart): Promise<string> {
   session.set("cart", cart);
   return storage.commitSession(session);

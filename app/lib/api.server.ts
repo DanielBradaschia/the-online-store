@@ -34,7 +34,6 @@ export type Product = {
   images: string[];
 };
 
-/** The slimmer shape used by list views (see LIST_FIELDS). */
 export type ProductSummary = Pick<
   Product,
   "id" | "title" | "price" | "thumbnail" | "category" | "rating"
@@ -53,8 +52,6 @@ export type Category = {
   url: string;
 };
 
-// export type SortField = "price" | "title" | "rating";
-// export type SortOrder = "asc" | "desc";
 
 export type ListParams = {
   limit: number;
@@ -65,7 +62,7 @@ export type ListParams = {
 
 /* ---------- Internals ---------- */
 
-// Only ask the API for what the grid renders — much smaller payloads.
+// Only ask the API for what the grid renders.
 const LIST_FIELDS = ["title", "price", "thumbnail", "category", "rating"];
 
 function listQuery({ limit, skip, sortBy, order }: ListParams) {
@@ -106,7 +103,7 @@ async function request(path: string, signal?: AbortSignal): Promise<Response | n
   return res;
 }
 
-/** Like request(), but a 404 is an error too (→ 404 page). */
+/** Like request(), but a 404 is an error too (-> 404 page). */
 async function fetchJson<T>(path: string, signal?: AbortSignal): Promise<T> {
   const res = await request(path, signal);
   if (!res) throw data("Not found", { status: 404 });
@@ -150,7 +147,6 @@ export function getProduct(id: string | number, signal?: AbortSignal) {
   return fetchJson<Product>(`/products/${productId}`, signal);
 }
 
-/** Like getProduct, but resolves to null when the product doesn't exist. */
 export async function findProduct(
   id: number,
   signal?: AbortSignal,

@@ -34,7 +34,7 @@ export async function getCatalogPage(
 
   const results = await Promise.all(
     categories.map((slug) =>
-      // limit: 0 → every product in the category
+      // limit: 0 -> every product in the category
       getProductsByCategory(slug, { limit: 0, skip: 0 }, signal),
     ),
   );

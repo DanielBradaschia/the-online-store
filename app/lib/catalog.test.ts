@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import type { ProductSummary } from "./api.server";
 
-// Replace the real API with fakes — these tests are about our merge,
+// Replace the real API with fakes - these tests are about our merge,
 // sort and pagination logic, not about DummyJSON.
 vi.mock("./api.server", () => ({
   getProducts: vi.fn(),
